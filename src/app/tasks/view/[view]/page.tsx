@@ -1,6 +1,5 @@
 const Airtable = require('airtable');
  
-
 const getTasksForView = async ({baseId, table, view}) => {
   const base = new Airtable({apiKey: process.env.AIRTABLE_API_KEY}).base(baseId);
   const theRecords = [];
@@ -25,12 +24,22 @@ export default async function Page({ params }: { params: { view: string } }) {
     view: params.view
   })
 
-    return <div>
-      theView: {params.view}
-      <pre>{JSON.stringify(data, null, 4)}</pre>
+    return (
+      <div>
+        theView: {params.view}
+        {
+          data.map((record, i)=>{ return (
+            <div key={i}>
+              <h3>{record.fields.Title}</h3>
+              <p>{record.fields.Description || "No Description"}</p>
+            </div>
+          )})
+        }
+        <h2>all the data</h2>
+        <pre>{JSON.stringify(data, null, 4)}</pre>
       </div>
+    )
 }
   
   
   
- 

@@ -26,8 +26,8 @@ export async function GET( request, { params } ) {
             table: params.table,
             view: params.view
         });
-        return NextResponse.json({ params: params, result: records})
+        return NextResponse.json({ params: params, records: records})
     } catch (error) {
-        return NextResponse.json({ params: params, result: "no data"})
+        return NextResponse.json({ params: params, records: "no data"})
     }
 }
